@@ -1,0 +1,114 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "dbs quiz",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.RepeatIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AnswerIntent",
+                    "slots": [
+                        {
+                            "name": "Answer",
+                            "type": "Services"
+                        }
+                    ],
+                    "samples": [
+                        "{Answer}"
+                    ]
+                },
+                {
+                    "name": "QuizIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "QuizIntent start a quiz",
+                        "QuizIntent start a quiz game",
+                        "QuizIntent and start a quiz",
+                        "QuizIntent and quiz me",
+                        "QuizIntent for a quiz",
+                        "QuizIntent a quiz",
+                        "QuizIntent start quiz",
+                        "QuizIntent begin quiz",
+                        "QuizIntent begin",
+                        "QuizIntent start quiz at question {question}",
+                        "QuizIntent start quiz at {question}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "Services",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "A",
+                                "synonyms": [
+                                    "a",
+                                    "a.",
+                                    "A."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "B",
+                                "synonyms": [
+                                    "b",
+                                    "b.",
+                                    "B."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "C",
+                                "synonyms": [
+                                    "c",
+                                    "c.",
+                                    "C."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "D",
+                                "synonyms": [
+                                    "d",
+                                    "d.",
+                                    "D."
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
