@@ -1,0 +1,399 @@
+
+const Alexa = require('alexa-sdk');
+
+
+var APP_ID = "amzn1.ask.skill.d6918fdc-6ace-4b2f-aede-eb275e3e8f80";
+
+function getQuestion(counter) {
+    var desc = "";
+    switch (counter) {
+        case 1:
+            desc = "Here is the " + counter + "th question. Conversational bot may be largely classified into two categories. Which are the two categories? ";
+            desc += "A. Retrieval-based and Generative-based. B. Retrieval-based and Functional-based. C. Informative-based and Generative-based. D. None of the above.";
+            return desc;
+            break;
+
+        case 2:
+            desc = "Here is the  " + counter + "th question. What proportion major companies around the world is expected to use conversational bots for customer interaction by twenty twenty?";
+            desc += "A. 80%. B. 70%. C. 60%. D. 50%.";
+            return desc;
+            break;
+
+        case 3:
+            desc = "Here is the  " + counter + "th question. What is the AWS technology or service that is powering the information-retrieval and natural language understanding in Alexa?";
+            desc += "A.Container. B. Serverless. C. Lex. D. A I Sagemaker.";
+            return desc;
+            break;
+
+        // case 4:
+        //   desc = "Here is the  " + counter + "th question. What AWS service mentioned previously can delight your customers by delivering the next generation of customer service experiences with AI-powered automation?";
+        //     desc += "A. Alexa. B. Amazon Translate. C. Amazon Managed A.I. Services. D. Amazon Connect";
+        //     return desc;
+        //     break;
+
+        // case 5:
+        //     desc = "Here is the " + counter + "th question. Who is the CEO of DBS?";
+        //     desc += "A. Piyush Gupta. B. Neal Cross. C. Siew Choo. D. Johnson.";
+        //     return desc;
+        //     break;
+
+        // case 6:
+        //     desc = "Here is the " + counter + "th question. Who is the Chief Innovation Officer of DBS?";
+        //     desc += "A. Siew Choo. B. Neal. C. Johnson. D.Piyush.";
+        //     return desc;
+        //     break;
+
+        // case 7:
+        //     desc = "Here is the " + counter + "th question. When was D.b.s. founded?";
+        //     desc += "A. nineteen sixty six. B. nineteen sixty seven. C. nineteen sixty eight. D. nineteen sixty nine.";
+        //     return desc;
+        //     break;
+
+        // case 8:
+        //     desc = "Here is the " + counter + "th question. Where did virtual bank assistant launched?";
+        //     desc += "A. Hong Kong. B. Indonesia. C. Taiwan. D. India.";
+        //     return desc;
+        //     break;
+
+        // case 9:
+        //     desc = "Here is the " + counter + "th question. Who is the head of Data Science?";
+        //     desc += "A. Johnson. B. Neal. C. Siew Choo. D. me, Alexa, haha";
+        //     return desc;
+        //     break;
+
+
+        default:
+            break;
+    }
+
+}
+
+function getRealAnswer(counter) {
+    switch (counter) {
+        case 1:
+            return "Retrieval-based and Generative-based.";
+            break;
+
+        case 2:
+            return "80%.";
+            break;
+
+        case 3:
+            return "Lex.";
+            break;
+
+        // case 4:
+        //     return "Amazon Connect.";
+        //     break;
+
+        // case 5:
+        //     return "Piyush Gupta.";
+        //     break;
+
+        // case 6:
+        //     return "Neal.";
+        //     break;
+
+        // case 7:
+        //     return "nineteen sixty eight.";
+        //     break;
+
+        // case 8:
+        //     return "india.";
+        //     break;
+
+        // case 9:
+        //     return "Johnson.";
+        //     break;
+
+
+        default:
+            break;
+    }
+}
+
+function getAnswer(counter) {
+    switch (counter) {
+        case 1:
+            return "A";
+            break;
+
+        case 2:
+            return "A";
+            break;
+
+        case 3:
+            return "C";
+            break;
+
+        // case 4:
+        //     return "D";
+        //     break;
+
+        // case 5:
+        //     return "A";
+        //     break;
+
+        // case 6:
+        //     return "B";
+        //     break;
+
+        // case 7:
+        //     return "C";
+        //     break;
+
+        // case 8:
+        //     return "D";
+        //     break;
+
+        // case 9:
+        //     return "A";
+        //     break;
+
+
+
+        default:
+            break;
+    }
+}
+
+
+var speechConsCorrect = ["Bingo", "Bravo", "Cheers",
+    "Oh dear.  Just kidding.  Hurray",
+    "Righto", "Way to go", "Well done", "Woo hoo", "Yay"];
+
+
+var speechConsWrong = ["Argh", "Aw man", "Bummer", "Dun dun dun", "Eek", "Oh dear", "Oof", "Ouch", "Shucks", "Uh oh"];
+
+var WELCOME_MESSAGE = "Welcome to DBS Quiz! Are you ready? If yes, say 'start quiz'. If not, say 'Quit'.";
+
+var START_QUIZ_MESSAGE = "Great. I will give you 3 questions from today's session. You simply say which option is correct. A? B? C? or D. If you don't know the answer, say, I don't know. Don't worry. You have unlimited number of trials.";
+
+var EXIT_SKILL_MESSAGE = "Thank you very much for taking this quiz. You are awesome! I really enjoy talking to you. Have a great day!";
+
+var REPROMPT_SPEECH = "Sorry, I did not catch that?";
+
+var HELP_MESSAGE = "I know lots of things about the DBS.  I will test your DBS knowledge by quiz.";
+
+function getBadAnswer(item) { return "I'm sorry. " + item + " is not something I know very much about in this skill. " + HELP_MESSAGE; }
+
+
+
+var counter = 0;
+var MAXQ = 3;
+
+var states = {
+    START: "_START",
+    QUIZ: "_QUIZ"
+};
+
+const handlers = {
+    "LaunchRequest": function () {
+        this.handler.state = states.START;
+        this.emitWithState("Start");
+    },
+    "QuizIntent": function () {
+        this.handler.state = states.QUIZ;
+        this.emitWithState("Quiz");
+    },
+    "AnswerIntent": function () {
+        this.handler.state = states.START;
+        this.emitWithState("AnswerIntent");
+    },
+    "AMAZON.HelpIntent": function () {
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "Unhandled": function () {
+        console.log("UNHANDLED AT HANDLERS");
+        this.handler.state = states.START;
+        this.emitWithState("Start");
+    }
+};
+
+var startHandlers = Alexa.CreateStateHandler(states.START, {
+    "Start": function () {
+        this.response.speak(WELCOME_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
+    },
+
+    "QuizIntent": function () {
+        this.handler.state = states.QUIZ;
+        this.emitWithState("Quiz");
+    },
+    "AMAZON.RepeatIntent": function () {
+        this.emitWithState("AskQuestion");
+    },
+    "AMAZON.StopIntent": function () {
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "AMAZON.CancelIntent": function () {
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "AMAZON.HelpIntent": function () {
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "Unhandled": function () {
+        console.log("UNHANDLED AT STARTHANDLERS");
+        this.emitWithState("Start");
+    }
+});
+
+
+var quizHandlers = Alexa.CreateStateHandler(states.QUIZ, {
+    "Quiz": function () {
+        this.attributes["response"] = "";
+        this.attributes["counter"] = 0;
+
+        if (this.event.request.intent.slots["question"].value != undefined) {
+            console.log("QUESTION JUMP: " + this.event.request.intent.slots["question"].value.toString());
+
+            if (this.event.request.intent.slots["question"].value <= MAXQ) {
+                this.attributes["counter"] = this.event.request.intent.slots["question"].value - 1;
+            }
+        }
+
+
+        this.emitWithState("AskQuestion");
+    },
+    "AskQuestion": function () {
+
+        if (this.attributes["counter"] == 0 && this.attributes["start"] != 1) {
+            this.attributes["response"] = START_QUIZ_MESSAGE + " ";
+        }
+
+        this.attributes["counter"]++;
+
+        var question = getQuestion(this.attributes["counter"]);
+        var speech = this.attributes["response"] + question + "<break time='1s'/>";
+
+        this.response.speak(speech).listen(question);
+        this.emit(":responseReady");
+    },
+    "AnswerIntent": function () {
+        var response = "";
+        var speechOutput = "";
+
+        var correct = compareSlots(this.event.request.intent.slots, getAnswer(this.attributes["counter"]));
+
+        if (correct) {
+            response = getSpeechCon(true);
+            response += "That is correct!";
+            response += "The answer is " + getRealAnswer(this.attributes["counter"]) + "<break time='1s'/>";
+        }
+        else {
+            response = getSpeechCon(false);
+            response += "Sorry, that is not the right answer! Please try again!";
+
+            this.attributes["counter"]--;
+            if (this.attributes["counter"] == 0) {
+                this.attributes["start"] = 1;
+            }
+            console.log("RESET QUESTION OR RETRY QUESTION");
+
+        }
+
+        if (this.attributes["counter"] < MAXQ) {
+            this.attributes["response"] = response;
+            this.emitWithState("AskQuestion");
+        }
+        else {
+            speechOutput = response + " " + EXIT_SKILL_MESSAGE;
+
+            this.response.speak(speechOutput);
+            this.emit(":responseReady");
+        }
+    },
+    "AMAZON.RepeatIntent": function () {
+        var question = getQuestion(this.attributes["counter"]);
+        this.response.speak(question).listen(question);
+        this.emit(":responseReady");
+    },
+    "AMAZON.StartOverIntent": function () {
+        this.emitWithState("Quiz");
+    },
+    "AMAZON.StopIntent": function () {
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "AMAZON.CancelIntent": function () {
+        this.response.speak(EXIT_SKILL_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "AMAZON.HelpIntent": function () {
+        this.response.speak(HELP_MESSAGE).listen(HELP_MESSAGE);
+        this.emit(":responseReady");
+    },
+    "AMAZON.NextIntent": function () {
+        var r = "";
+        r = "The answer is " + getRealAnswer(this.attributes["counter"]) + "<break time='1s'/>";
+
+        if (this.attributes["counter"] < MAXQ) {
+            this.attributes["response"] = r;
+            this.emitWithState("AskQuestion");
+        }
+        else {
+            speechOutput = response + " " + EXIT_SKILL_MESSAGE;
+
+            this.response.speak(speechOutput);
+            this.emit(":responseReady");
+        }
+    },
+    "Unhandled": function () {
+        console.log("UNHANDLED AT QUIZHANDLER");
+        this.attributes["counter"]--;
+        var r = "";
+        r = "Sorry, I do not understand or there was no response." + "<break time='1s'/>";
+        this.attributes["response"] = r;
+        this.emitWithState("AskQuestion");
+        //this.emitWithState("AnswerIntent");
+    }
+});
+
+function compareSlots(slots, value) {
+    for (var slot in slots) {
+        console.log("I WANT THIS: " + slot);
+        if (slots[slot].value != undefined) {
+            console.log("INPUT: " + slots[slot].value.toString().toLowerCase()[0]);
+            console.log("ANSWER: " + value.toString().toLowerCase());
+            if (slots[slot].value.toString().toLowerCase()[0] == value.toString().toLowerCase()) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+function getRandomSymbolSpeech(symbol) {
+    return "<say-as interpret-as='spell-out'>" + symbol + "</say-as>";
+}
+
+
+function getSpeechCon(type) {
+    var speechCon = "";
+    if (type) return "<say-as interpret-as='interjection'>" + speechConsCorrect[getRandom(0, speechConsCorrect.length - 1)] + "! </say-as><break strength='strong'/>";
+    else return "<say-as interpret-as='interjection'>" + speechConsWrong[getRandom(0, speechConsWrong.length - 1)] + " </say-as><break strength='strong'/>";
+}
+
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
+function formatCasing(key) {
+    key = key.split(/(?=[A-Z])/).join(" ");
+    return key;
+}
+
+
+exports.handler = (event, context) => {
+    const alexa = Alexa.handler(event, context);
+    alexa.appId = APP_ID;
+    //alexa.dynamoDBTableName = 'ServiceQuizSessionState';
+    alexa.registerHandlers(handlers, startHandlers, quizHandlers);
+    alexa.execute();
+};
