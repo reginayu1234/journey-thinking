@@ -1,0 +1,261 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "dax quiz",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AnswerIntent",
+                    "slots": [
+                        {
+                            "name": "DAXTopic",
+                            "type": "DAXTopic"
+                        },
+                        {
+                            "name": "BuildingNameOf",
+                            "type": "BuildingNameoF"
+                        },
+                        {
+                            "name": "FullNameOf",
+                            "type": "FullNameOf"
+                        },
+                        {
+                            "name": "NumberOfShowCasesIn",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "LocationOfVirtualBankAssistantIn",
+                            "type": "LocationOfVirtualBankAssistantIn"
+                        },
+                        {
+                            "name": "CEO",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "NameofThisNeighborhoodAround",
+                            "type": "NameofThisNeighborhoodAround"
+                        },
+                        {
+                            "name": "FullNameOfVTMIn",
+                            "type": "FullNameOfVTMIn"
+                        },
+                        {
+                            "name": "CIO",
+                            "type": "CIO"
+                        },
+                        {
+                            "name": "Head",
+                            "type": "Head"
+                        },
+                        {
+                            "name": "NumberOfOfficesBelongTo",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "Founded",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "Digibank",
+                            "type": "Digibank"
+                        }
+                    ],
+                    "samples": [
+                        "{DAXTopic}",
+                        "{BuildingNameOf}",
+                        "{FullNameOf}",
+                        "{NumberOfShowCasesIn}",
+                        "{LocationOfVirtualBankAssistantIn}",
+                        "{CEO}",
+                        "{NameofThisNeighborhoodAround}",
+                        "{FullNameOfVTMIn}",
+                        "{CIO}",
+                        "{Head}",
+                        "{NumberOfOfficesBelongTo}",
+                        "{Founded}",
+                        "{Digibank}"
+                    ]
+                },
+                {
+                    "name": "QuizIntent",
+                    "slots": [],
+                    "samples": [
+                        "QuizIntent start a quiz",
+                        "QuizIntent start a quiz game",
+                        "QuizIntent and start a quiz",
+                        "QuizIntent and quiz me",
+                        "QuizIntent for a quiz",
+                        "QuizIntent a quiz"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "BuildingNameoF",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Sandcrawler"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CEO",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CIO",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Neal"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DAXTopic",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "DAX"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "DBS"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Digibank",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Kai"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Founded",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "FullNameOf",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "DBS Asia X"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Development Bank of Singapore"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "FullNameOfVTMIn",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Video Teller Machine"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Head",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Annie"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "LocationOfVirtualBankAssistantIn",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "India"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "NameofThisNeighborhoodAround",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "One North"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "NumberOfOfficesBelongTo",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Four"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "NumberOfShowCasesIn",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Three"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "3"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
